@@ -67,19 +67,19 @@ export class App extends Component {
       this._provider.getSigner(0)
     )
 
+       this.setState({
+      selectedAccount: selectedAddress
+    }, async () => {
+      await this.updateBalance()
+    })
+
     if (await this.updateStopped()) { return }
 
     this.startingPrice = await this._auction.startingPrice()
     this.startAt = ethers.BigNumber.from(await this._auction.startAt() * 1000)
     this.discountRate = await this._auction.discountRate()
 
-    this.setState({
-      selectedAccount: selectedAddress
-    }, async () => {
-      await this.updateBalance()
-    })
-
-    this.checkPriceInterval = setInterval(() => {
+     this.checkPriceInterval = setInterval(() => {
       const eclapsed = ethers.BigNumber.from(
         Date.now()
       ).sub(this.startAt)
