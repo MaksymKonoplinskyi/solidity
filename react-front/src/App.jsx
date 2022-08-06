@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { ethers } from 'ethers'
 
-import { ConnectWallet } from '../../contracts/components/ConnectWallet'
+import { ConnectWallet } from './components/ConnectWallet'
 
-import auctionAddress from '../contracts/DutchAuction-contract-address.json'
-import auctionArtifact from '../contracts/DutchAuction.json'
+import auctionAddress from './contracts/DutchAuction-contract-address.json'
+import auctionArtifact from './contracts/DutchAuction.json'
 
 const HARDHAT_NETWORK_ID = '1337'
-const ERROR_CODE_TX_REJECTED_BY_USER = 4001
+//const ERROR_CODE_TX_REJECTED_BY_USER = 4001
 
-export default class extends Component {
+export class App extends Component {
   constructor(props) {
     super(props)
 
@@ -25,7 +25,7 @@ export default class extends Component {
   }
 
   _connectWallet = async () => {
-    if(window.ethereum === undefined) {
+    if (window.ethereum === undefined) {
       this.setState({
         networkError: 'Please install Metamask!'
       })
@@ -36,12 +36,12 @@ export default class extends Component {
       method: 'eth_requestAccounts'
     })
 
-    if(!this._checkNetwork()) { return }
+    if (!this._checkNetwork()) { return }
 
     this._initialize(selectedAddress)
 
     window.ethereum.on('accountsChanged', ([newAddress]) => {
-      if(newAddress === undefined) {
+      if (newAddress === undefined) {
         return this._resetState()
       }
 
@@ -85,6 +85,7 @@ export default class extends Component {
 
   _checkNetwork() {
     if (window.ethereum.networkVersion === HARDHAT_NETWORK_ID) { return true }
+    
 
     this.setState({
       networkError: 'Please connect to localhost:8545'
@@ -100,7 +101,7 @@ export default class extends Component {
   }
 
   render() {
-    if(!this.state.selectedAccount) {
+    if (!this.state.selectedAccount) {
       return <ConnectWallet
         connectWallet={this._connectWallet}
         networkError={this.state.networkError}
@@ -108,11 +109,12 @@ export default class extends Component {
       />
     }
 
-    return(
+    return (
       <>
         {this.state.balance &&
           <p>Your balance: {ethers.utils.formatEther(this.state.balance)} ETH</p>}
       </>
     )
   }
-} 
+}
+export default App;
