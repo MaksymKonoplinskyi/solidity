@@ -5,8 +5,9 @@ import { ConnectWallet } from './components/ConnectWallet'
 
 import auctionAddress from './contracts/DutchAuction-contract-address.json'
 import auctionArtifact from './contracts/DutchAuction.json'
-import { WaitingForTransactionMassage } from './components/WaitingForTransactionMassage'
-import { TransactionErrorMassage } from './components/TransactionErrorMassage'
+import { WaitingForTransactionMessage } from './components/WaitingForTransactionMassage'
+import { TransactionErrorMessage } from './components/TransactionErrorMassage'
+
 
 const HARDHAT_NETWORK_ID = '1337'
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001
@@ -157,7 +158,7 @@ export class App extends Component {
       this.setState({
         txBeingSent: tx.hash
       })
-      await tx.weit()
+      await tx.wait()
 
     } catch (err) {
       
@@ -201,10 +202,10 @@ export class App extends Component {
     return (
       <>
         {this.state.txBeingSent &&
-          <WaitingForTransactionMassage txHash={this.state.txBeingSent} />}
+          <WaitingForTransactionMessage txHash={this.state.txBeingSent} />}
 
         {this.state.transactionError && (
-          <TransactionErrorMassage
+          <TransactionErrorMessage
            message={this._getRpcErrorMessage(this.state.transactionError)}
            dismiss={this._dismissTransactionError} 
            />
