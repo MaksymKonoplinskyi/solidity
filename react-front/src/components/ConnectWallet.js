@@ -18,4 +18,4 @@ export function ConnectWallet({ connectWallet, networkError, dismiss }) {
       </button>
     </>
   )
-} 
+}
