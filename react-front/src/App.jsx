@@ -80,10 +80,10 @@ export class App extends Component {
     this.discountRate = await this._auction.discountRate()
 
      this.checkPriceInterval = setInterval(() => {
-      const eclapsed = ethers.BigNumber.from(
+      const elapsed = ethers.BigNumber.from(
         Date.now()
       ).sub(this.startAt)
-      const discount = this.discountRate.mul(eclapsed)
+      const discount = this.discountRate.mul(elapsed)
       const newPrice = this.startingPrice.sub(discount)
       this.setState({
         currentPrice: ethers.utils.formatEther(newPrice)
