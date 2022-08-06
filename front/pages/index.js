@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ethers } from 'ethers'
 
-import { ConnectWallet } from '../components/ConnectWallet'
+import { ConnectWallet } from '../../contracts/components/ConnectWallet'
 
 import auctionAddress from '../contracts/DutchAuction-contract-address.json'
 import auctionArtifact from '../contracts/DutchAuction.json'
