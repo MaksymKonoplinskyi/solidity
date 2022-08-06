@@ -76,12 +76,12 @@ export class App extends Component {
     if (await this.updateStopped()) { return }
 
     this.startingPrice = await this._auction.startingPrice()
-    this.startAt = ethers.BigNumber.from(await this._auction.startAt() * 1000)
+    this.startAt = await this._auction.startAt()
     this.discountRate = await this._auction.discountRate()
 
      this.checkPriceInterval = setInterval(() => {
       const elapsed = ethers.BigNumber.from(
-        Date.now()
+        Math.floor(Date.now() / 1000)
       ).sub(this.startAt)
       const discount = this.discountRate.mul(elapsed)
       const newPrice = this.startingPrice.sub(discount)
