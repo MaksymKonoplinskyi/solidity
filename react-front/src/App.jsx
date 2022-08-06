@@ -67,7 +67,7 @@ export class App extends Component {
       this._provider.getSigner(0)
     )
 
-    if(await this.updateStopped()) {return}
+    if (await this.updateStopped()) { return }
 
     this.startingPrice = await this._auction.startingPrice()
     this.startAt = ethers.BigNumber.from(await this._auction.startAt() * 1000)
@@ -94,7 +94,7 @@ export class App extends Component {
   updateStopped = async () => {
     const stopped = await this._auction.stopped()
 
-    if(stopped) {
+    if (stopped) {
       clearInterval(this.checkPriceInterval)
     }
 
@@ -161,7 +161,7 @@ export class App extends Component {
       await tx.wait()
 
     } catch (err) {
-      
+
       if (err.code === ERROR_CODE_TX_REJECTED_BY_USER) { return }
       console.error(err)
       this.setState({
@@ -190,12 +190,10 @@ export class App extends Component {
         connectWallet={this._connectWallet}
         networkError={this.state.networkError}
         dismiss={this._dismissNetworkError}
-
-
       />
     }
 
-    if(this.state.stopped) {
+    if (this.state.stopped) {
       return <p>Auction stopped.</p>
     }
 
@@ -206,10 +204,10 @@ export class App extends Component {
 
         {this.state.transactionError && (
           <TransactionErrorMessage
-           message={this._getRpcErrorMessage(this.state.transactionError)}
-           dismiss={this._dismissTransactionError} 
-           />
-           )}
+            message={this._getRpcErrorMessage(this.state.transactionError)}
+            dismiss={this._dismissTransactionError}
+          />
+        )}
 
         {this.state.balance &&
           <p>Your balance: {ethers.utils.formatEther(this.state.balance)} ETH</p>}
