@@ -30,7 +30,7 @@ async function main() {
 }
 
 function saveFrontendFiles(contracts) {
-  const contractsDir = path.join(__dirname, '/..', 'react-front/src/contracts')
+  const contractsDir = path.join(__dirname, '/../..', 'react-front/src/contracts')
 
   if(!fs.existsSync(contractsDir)) {
     fs.mkdirSync(contractsDir)

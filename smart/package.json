@@ -1,8 +1,11 @@
 {
-  "name": "solidity",
+  "name": "smart",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "hardhat.config0.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+    "@nomicfoundation/hardhat-toolbox": "^1.0.1",
     "hardhat": "^2.10.1"
   }
 }
