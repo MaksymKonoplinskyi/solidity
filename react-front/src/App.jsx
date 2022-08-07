@@ -72,21 +72,18 @@ export class App extends Component {
     }, async () => {
       await this.updateBalance()
     })
-    
-    if(await this.updateStopped()) {return}
 
-    this.startingPrice = await this._auction.startingPrice()
-    this.startAt = ethers.BigNumber.from(await this._auction.startAt() * 1000)
-    this.discountRate = await this._auction.discountRate()
+    if (await this.updateStopped()) { return }
 
     this.startingPrice = await this._auction.startingPrice()
     this.startAt = await this._auction.startAt()
     this.discountRate = await this._auction.discountRate()
 
-     this.checkPriceInterval = setInterval(() => {
+    this.checkPriceInterval = setInterval(() => {
       const elapsed = ethers.BigNumber.from(
         Math.floor(Date.now() / 1000)
       ).sub(this.startAt)
+      
       const discount = this.discountRate.mul(elapsed)
       const newPrice = this.startingPrice.sub(discount)
       this.setState({
