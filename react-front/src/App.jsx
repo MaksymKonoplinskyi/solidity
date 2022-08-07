@@ -163,8 +163,8 @@ export class App extends Component {
 
     } catch (err) {
 
-      if (err.code === ERROR_CODE_TX_REJECTED_BY_USER) { return }
-      console.error(err)
+      // if (err.code === ERROR_CODE_TX_REJECTED_BY_USER) { return }
+      // console.error(err)
       this.setState({
         transactionError: err
       })
