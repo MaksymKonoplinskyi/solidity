@@ -89,7 +89,7 @@ export class App extends Component {
       this.setState({
         currentPrice: ethers.utils.formatEther(newPrice)
       })
-    }, 1000)
+    }, 10000) ////////1000
   }
 
   updateStopped = async () => {
@@ -163,8 +163,8 @@ export class App extends Component {
 
     } catch (err) {
 
-      // if (err.code === ERROR_CODE_TX_REJECTED_BY_USER) { return }
-      // console.error(err)
+      if (err.code === ERROR_CODE_TX_REJECTED_BY_USER) { return }
+      console.error(err)
       this.setState({
         transactionError: err
       })
@@ -218,8 +218,6 @@ export class App extends Component {
             <p>Current item price: {this.state.currentPrice} ETH</p>
             <button onClick={this.buy}>Buy!</button>
           </div>}
-
-
       </>
     )
   }

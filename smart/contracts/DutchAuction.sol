@@ -42,7 +42,7 @@ contract DutchAuction {
     function buy() external payable notStopped {
         require(block.timestamp < endsAt, "too late!");
         uint price = getPrice();
-        require(msg.value >= price, "too low!");
+        require(msg.value >= price, "too low!!!");
         uint refund = msg.value - price;
         if (refund > 0) {
             payable(msg.sender).transfer(refund);
